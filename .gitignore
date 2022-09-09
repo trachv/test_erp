@@ -1,0 +1,13 @@
+
+# dependencies
+/frontend/project-select/node_modules
+/backend/dist
+/backend/node_modules
+/backend/.env
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
