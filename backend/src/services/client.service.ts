@@ -10,7 +10,7 @@ export default class ClientService {
     return client;
   }
   async delete(id: string) {
-    const deletedDog: Client | null = await Client.findByPk(id);
+    const deleted: Client | null = await Client.findByPk(id);
     return await Client.destroy({ where: { id } });
   }
 }

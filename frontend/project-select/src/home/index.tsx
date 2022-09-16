@@ -4,17 +4,16 @@ import SelectInput from "../components/select-input/select-input.component";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import axios from "axios";
 import { IClient, IProject } from "../types/types.common";
+import projectService from "../services/project.service";
+import clientService from "../services/client.service";
 
 const HomePage = () => {
 
   let operationDate: string = new Date(Date.now()).toLocaleDateString().replace(/\./g, '');
 
-
   const [currentClient, setCurrentClient]: [string, (curValue: string) => void] = useState('');
   const [currentProject, setCurrentProject]: [string, (curValue: string) => void] = useState('');
-
 
   const defaultClients: IClient[] = [];
   const [clients, setClients]: [IClient[], (clients: IClient[]) => void] =
@@ -30,16 +29,14 @@ const HomePage = () => {
   }, []);
 
   const updateClients = () => {
-    axios
-      .get<IClient[]>("http://localhost:3001/api/clients")
-      .then((response) => {
-        setClients(response.data);
-      });
+    clientService.getAll().then((data) => {
+      setClients(data);
+    });
   };
 
   const updateProjects = (curValue?: string) => {
-    axios.get<IProject[]>("http://localhost:3001/api/projects").then((res) => {
-      setProjects(res.data);
+    projectService.getAll().then((data) => {
+      setProjects(data);
       if (curValue) {
         setCurrentProject(curValue);
       }
@@ -53,24 +50,23 @@ const HomePage = () => {
   const changeProjectHandler = (value: string) => {
     setCurrentProject(value);
     const findedProjects = projects.find(project => project.id as unknown as string === value);
-    if (findedProjects) { 
+    if (findedProjects) {
       setCurrentClient(findedProjects.ID_DEP_CLIENT);
     }
-
   };
 
   const onClickHandler = () => {
-    axios.post<IProject>("http://localhost:3001/api/projects", {
+    projectService.create({
       ID_DEP_CLIENT: currentClient,
       ID_PROJECT: `${currentClient}-${operationDate}`,
-    }).then(res => {
-      updateProjects(res.data.id as unknown as string);
+    }).then(data => {
+      updateProjects(data.id as unknown as string);
     })
   };
 
   return (
     <>
-      <HeaderComponent />
+      <HeaderComponent operationDate={operationDate} />
       <Box sx={{ p: 1, width: "30%" }}>
         <Container>
           <SelectInput

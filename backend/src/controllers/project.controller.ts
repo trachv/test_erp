@@ -9,11 +9,13 @@ export class ProjectController {
     const projects: Project[] = await this.projectService.getAll();
     res.send(projects);
   }
+
 	async getByClient(req: Request, res: Response, next: NextFunction) {
 		const { id } = req.params;
     const projects: Project[] = await this.projectService.getByClient(id);
     res.send(projects);
   }
+
   async create(
     req: Request<{}, {}, Project>,
     res: Response,
@@ -22,6 +24,7 @@ export class ProjectController {
     const project: Project = await this.projectService.create(req.body);
     res.send(project);
   }
+
   async delete(req: Request, res: Response) {
     const { id } = req.params;
     const deletedClient = await this.projectService.delete(id);

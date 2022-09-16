@@ -35,8 +35,8 @@ export default function SelectInput(props: Props) {
             onChange={handleChangeLocal}
             fullWidth
           >
-            {data.map((el) => {
-              return <MenuItem value={el.value}>{el.label}</MenuItem>;
+            {data.map((el, index) => {
+              return <MenuItem key={index} value={el.value}>{el.label}</MenuItem>;
             })}
           </Select>
         </Grid>

@@ -1,6 +1,8 @@
 import { Router } from "express";
 import asyncHandler from "express-async-handler";
 import clientController from "../../controllers/client.controller";
+import clientValidator from "../../middlewares/client.validator";
+import commonValidator from "../../middlewares/common.validator";
 
 const clientRouter: Router = Router();
 
@@ -10,6 +12,8 @@ clientRouter.get(
 );
 clientRouter.post(
   "",
+  clientValidator.create(),
+  commonValidator.validate.bind(commonValidator),
   asyncHandler(clientController.create.bind(clientController))
 );
 clientRouter.delete(
