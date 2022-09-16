@@ -11,14 +11,14 @@ export class ProjectValidator {
         .withMessage("Client ID can not be empty!")
         .isString()
         .withMessage("Client ID should be a string"),
-      body("ID_PROJECT")
+      body("OPERATION_DATE")
         .trim()
         .escape()
         .not()
         .isEmpty()
-        .withMessage("Project ID can not be empty!")
+        .withMessage("Operation date can not be empty!")
         .isString()
-        .withMessage("Project ID should be a string"),
+        .withMessage("Operation date should be a string"),
     ];
   }
 }

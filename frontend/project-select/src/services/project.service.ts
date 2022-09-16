@@ -1,8 +1,8 @@
 import { BACKEND_KEYS } from "../common/consts/app-keys.const";
-import { IProject } from "../types/types.common";
+import { IProject } from "../common/types/types.common";
 import { HttpService } from "./http.service";
 
-export interface ICreateProject extends Omit<IProject,'id'> {}
+export interface ICreateProject extends Omit<IProject,'id, ID_PROJECT'> {}
 
 export class ProjectService {
   private httpService: HttpService<IProject>;

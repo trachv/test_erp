@@ -4,7 +4,7 @@ import SelectInput from "../components/select-input/select-input.component";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { IClient, IProject } from "../types/types.common";
+import { IClient, IProject } from "../common/types/types.common";
 import projectService from "../services/project.service";
 import clientService from "../services/client.service";
 
@@ -45,6 +45,12 @@ const HomePage = () => {
 
   const changeClientHandler = (value: string) => {
     setCurrentClient(value);
+    const findedProjects = projects.filter(project => project.ID_DEP_CLIENT === value);
+    if (findedProjects?.length === 1) {
+      setCurrentProject(findedProjects[0].id as unknown as string);
+    } else {
+      setCurrentProject('');
+    }
   };
 
   const changeProjectHandler = (value: string) => {
@@ -57,8 +63,8 @@ const HomePage = () => {
 
   const onClickHandler = () => {
     projectService.create({
+      OPERATION_DATE: operationDate,
       ID_DEP_CLIENT: currentClient,
-      ID_PROJECT: `${currentClient}-${operationDate}`,
     }).then(data => {
       updateProjects(data.id as unknown as string);
     })
@@ -90,7 +96,7 @@ const HomePage = () => {
             selectedValue={currentProject}
             handleChange={changeProjectHandler}
             data={projects.map((element) => {
-              return { value: element.id as unknown as string, label: `${element.id}-${element.ID_PROJECT}` };
+              return { value: element.id as unknown as string, label: `${element.DAY_ID}-${element.ID_PROJECT}` };
             })}
           />
         </Container>

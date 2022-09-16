@@ -4,7 +4,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
-import { IMenuItem } from "../../types/types.common";
+import { IMenuItem } from "../../common/types/types.common";
 
 export interface Props {
   selectedValue: string;

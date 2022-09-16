@@ -1,6 +1,9 @@
 import { NextFunction, Response, Request } from "express";
 import ProjectService from "../services/project.service";
 import { Project } from "../models/Project";
+import { ICreateProject } from '../types/types.common';
+
+
 
 export class ProjectController {
   constructor(private projectService: ProjectService) {}
@@ -17,7 +20,7 @@ export class ProjectController {
   }
 
   async create(
-    req: Request<{}, {}, Project>,
+    req: Request<{}, {}, ICreateProject>,
     res: Response,
     next: NextFunction
   ) {

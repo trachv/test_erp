@@ -7,6 +7,8 @@ export interface IClient {
 
 export interface IProject {
   id: number;
+  DAY_ID: string;
+  OPERATION_DATE: string;
   ID_DEP_CLIENT: string;
   ID_PROJECT: string;
   [key: string]: any;

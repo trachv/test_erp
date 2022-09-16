@@ -1,5 +1,5 @@
 import { BACKEND_KEYS } from "../common/consts/app-keys.const";
-import { IClient } from "../types/types.common";
+import { IClient } from "../common/types/types.common";
 import { HttpService } from "./http.service";
 
 export class ClientService {
